@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8933977C-2FF5-4803-BD9B-959445F5228E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Server\SimpleCallbacksServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Client\SimpleCallbacksClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SimpleCallbacksServer">
+        <MSBuild Projects="Server\SimpleCallbacksServer.dproj"/>
+    </Target>
+    <Target Name="SimpleCallbacksServer:Clean">
+        <MSBuild Projects="Server\SimpleCallbacksServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SimpleCallbacksServer:Make">
+        <MSBuild Projects="Server\SimpleCallbacksServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SimpleCallbacksClient">
+        <MSBuild Projects="Client\SimpleCallbacksClient.dproj"/>
+    </Target>
+    <Target Name="SimpleCallbacksClient:Clean">
+        <MSBuild Projects="Client\SimpleCallbacksClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SimpleCallbacksClient:Make">
+        <MSBuild Projects="Client\SimpleCallbacksClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SimpleCallbacksServer;SimpleCallbacksClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SimpleCallbacksServer:Clean;SimpleCallbacksClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SimpleCallbacksServer:Make;SimpleCallbacksClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
